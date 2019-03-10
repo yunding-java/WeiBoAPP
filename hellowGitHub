@@ -1,0 +1,52 @@
+从群里下载git安装包，选项都按照默认即可
+安装后设置环境变量 在path中新增git-cmd.exe的地址（包括此exe）
+在本机上设置你的github的邮箱和用户名
+
+git config --global user.name "用户名"
+git config --global user.email "邮箱"
+
+生成本机的SSH key
+
+ssh-keygen -t rsa -C "邮箱" 
+
+根据提示，按三次回车键，最后会生成ssh key值，并告诉你key值存放的文件的位置，找到该文件并复制ssh key
+打开你的github主页。找到Settings,选择SSH and GPG keys ，再选择new SSH key，title 随意填，key值就是刚刚生成的本机 SSH KEY
+这一步设置了本地git与github之间通信的密码，github账户只接受合法的SSH KEY 对其下项目进行修改。
+
+将自己的仓库与github上的某个项目关联
+
+　　1.打开github，寻找组织中项目 WeiBoAPP 的http (https://github.com/yunding-java/WeiBoAPP.git)
+
+　　2.打开本地仓库（要用于存放项目的文件夹）的git bash页面（右键）。输入
+
+git init
+git remote add origin "项目http地址"
+ 
+   3.建立连接后，先git add 和git commit -m '本次提交备注',把本地文件添加到暂存区
+ 
+用idea打开项目
+
+打开项目通常项目是还不能运行起来的，还要做一些配置
+
+选择正确可用的jdk版本，红色那三项是因为为这项目本来是在eclipse工具开发的，现在换了idea,这里把这散列去掉就行了。
+
+配置编译器输出路径
+
+选择jar包的路径，点击+号，选择java
+
+添加 spring, structs2 的facet
+
+配置tomcat
+
+做了关联之后，第一次pull会报以下错误，所以要在git bash里执行这条命令$ git pull origin dev --allow-unrelated-histories，dev替换成你要关联的远程分支名。要注意的是执行这句命令之前先把自己的代码add 和commit一下先。
+
+然后你执行这条$ git pull origin dev --allow-unrelated-histories命令的时候，它会告诉你本地文件与远处仓库哪些文件存在差异
+
+然后一个个把冲突解决完
+
+解决完冲突之后先add,然后commit ，就可以先把远程pull或者push了
+
+$ git pull origin dev
+$ git push origin master:dev
+
+最好启动成功，大功告成，不然就自己百度去。。
